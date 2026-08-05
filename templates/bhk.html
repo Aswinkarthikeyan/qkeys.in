@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>BHK | QKeys.in</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-100">
+
+<nav class="bg-slate-900 text-white">
+
+<div class="max-w-7xl mx-auto px-6 py-4 flex justify-between">
+
+<a href="{% url 'home' %}" class="text-3xl font-bold">
+QKeys<span class="text-blue-500">.in</span>
+</a>
+
+<div class="space-x-6">
+
+<a href="{% url 'home' %}">Home</a>
+
+<a href="{% url 'about' %}">About</a>
+
+<a href="{% url 'contact' %}">Contact</a>
+
+</div>
+
+</div>
+
+</nav>
+
+<section class="bg-slate-900 text-white py-16">
+
+<div class="max-w-7xl mx-auto px-6 text-center">
+
+<h1 class="text-5xl font-bold">
+Browse by BHK
+</h1>
+
+<p class="mt-4 text-slate-300">
+Choose your preferred BHK category.
+</p>
+
+</div>
+
+</section>
+
+<section class="max-w-7xl mx-auto px-6 py-16">
+
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+{% for bhk in bhks %}
+
+<div class="bg-white rounded-2xl shadow-lg p-8 text-center hover:shadow-2xl transition">
+
+<div class="text-6xl mb-4">
+🏠
+</div>
+
+<h2 class="text-3xl font-bold">
+{{ bhk.name }}
+</h2>
+
+<p class="text-gray-600 mt-4">
+Verified Properties
+</p>
+
+<a href="{% url 'properties_by_bhk' bhk.id %}"
+class="mt-6 inline-block bg-blue-700 text-white px-6 py-3 rounded-lg hover:bg-blue-800">
+
+View Properties →
+
+</a>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</section>
+
+</body>
+</html>

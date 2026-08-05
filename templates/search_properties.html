@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results | QKeys.in</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-100">
+
+<nav class="bg-white shadow">
+
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+
+        <a href="{% url 'home' %}"
+           class="text-3xl font-bold text-blue-700">
+            QKeys<span class="text-black">.in</span>
+        </a>
+
+        <div class="space-x-6">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'bhk' %}">BHK</a>
+            <a href="{% url 'location' %}">Location</a>
+            <a href="{% url 'about' %}">About</a>
+            <a href="{% url 'contact' %}">Contact</a>
+        </div>
+
+    </div>
+
+</nav>
+
+<section class="bg-blue-700 text-white py-14">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <h1 class="text-5xl font-bold">
+            Search Results
+        </h1>
+
+        <p class="mt-3 text-xl">
+
+            {% if selected_location_name %}
+                📍 {{ selected_location_name }}
+            {% endif %}
+
+            {% if selected_bhk_name %}
+                • 🏠 {{ selected_bhk_name }}
+            {% endif %}
+
+        </p>
+
+    </div>
+
+</section>
+
+<section class="max-w-7xl mx-auto py-12 px-6">
+
+    {% if properties %}
+
+    <div class="grid lg:grid-cols-2 gap-8">
+
+        {% for property in properties %}
+
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+
+            {% if property.image %}
+                <img src="{{ property.image.url }}"
+                     class="w-full h-64 object-cover">
+            {% endif %}
+
+            <div class="p-6">
+
+                <h2 class="text-3xl font-bold">
+                    {{ property.title }}
+                </h2>
+
+                <p class="mt-2">
+                    📍 {{ property.location }}
+                </p>
+
+                <p>
+                    🏠 {{ property.bhk }}
+                </p>
+
+                <p class="text-blue-700 text-3xl font-bold mt-4">
+                    ₹ {{ property.price }}
+                </p>
+
+                <div class="mt-6 flex gap-3">
+
+                    <a href="{% url 'property_detail' property.id %}"
+                       class="flex-1 bg-blue-700 text-center text-white py-3 rounded-lg">
+
+                        View Details
+
+                    </a>
+
+                    <a href="https://wa.me/918438383770?text=Hi,%20I'm%20interested%20to%20know%20more%20about%20this%20{{ property.title }}%20Property."
+                       target="_blank"
+                       class="flex-1 bg-green-600 text-center text-white py-3 rounded-lg">
+
+                        WhatsApp
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="bg-white rounded-2xl shadow-lg p-16 text-center">
+
+        <h2 class="text-4xl font-bold text-gray-500">
+
+            No Matching Properties Found
+
+        </h2>
+
+        <p class="mt-4 text-gray-600">
+
+            Try another Location or BHK.
+
+        </p>
+
+        <a href="{% url 'home' %}"
+           class="inline-block mt-8 bg-blue-700 text-white px-8 py-3 rounded-lg">
+
+            Back to Home
+
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+</body>
+</html>

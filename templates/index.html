@@ -1,0 +1,325 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QKeys.in - Find Your Dream Property</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif'],serif:['Fraunces','serif']}}}}</script>
+<style>
+*{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:#FCFCFD;color:#0F172A;-webkit-font-smoothing:antialiased}
+.reveal{opacity:0;transform:translateY(24px);transition:all .8s cubic-bezier(.16,1,.3,1)}
+.reveal.in-view{opacity:1;transform:translateY(0)}
+.stagger-1{transition-delay:.1s}.stagger-2{transition-delay:.2s}.stagger-3{transition-delay:.3s}
+.hero-img{transform:scale(1.06);will-change:transform}
+.card-hover{transition:all .4s cubic-bezier(.16,1,.3,1)}
+.card-hover:hover{transform:translateY(-6px);box-shadow:0 20px 40px -12px rgba(0,0,0,.18)}
+</style>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<!-- HEADER -->
+<header id="header" class="sticky top-0 z-50 border-b border-black/[0.06] bg-white/75 backdrop-blur-[18px]">
+  <div class="mx-auto max-w-[1280px] px-5 sm:px-8 h-[68px] flex items-center justify-between">
+    <a href="{% url 'home' %}" class="flex items-center gap-3">
+      <div class="h-9 w-9 rounded-[11px] bg-[#0F172A] flex items-center justify-center text-white font-bold">Q</div>
+      <div class="leading-none">
+        <div class="font-extrabold text-[18px] tracking-tight">QKeys<span class="text-[#14B8A6]">.in</span></div>
+        <div class="text-[10px] tracking-[0.18em] font-semibold text-black/40 uppercase -mt-0.5">Premium Estates</div>
+      </div>
+    </a>
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="{% url 'bhk' %}" class="text-[14px] font-medium text-black/70 hover:text-black transition">BHK</a>
+      <a href="{% url 'location' %}" class="text-[14px] font-medium text-black/70 hover:text-black transition">Location</a>
+      <a href="{% url 'about' %}" class="text-[14px] font-medium text-black/70 hover:text-black transition">About Us</a>
+      <a href="{% url 'contact' %}" class="text-[14px] font-medium text-black/70 hover:text-black transition">Contact Us</a>
+      <a href="#" class="ml-2 inline-flex h-9 items-center justify-center rounded-full bg-[#0F172A] px-5 text-[13px] font-semibold text-white hover:bg-black transition">List Property</a>
+    </nav>
+    <button id="mobBtn" class="md:hidden h-9 w-9 rounded-full border border-black/10 grid place-items-center">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h12M2 12h12" stroke="black" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div id="mobMenu" class="hidden md:hidden border-t border-black/5 bg-white px-5 py-4 space-y-3">
+    <a href="bhk.html" class="block py-2 font-medium">BHK</a>
+    <a href="location.html" class="block py-2 font-medium">Location</a>
+    <a href="{% url 'about' %}" class="block py-2 font-medium">About Us</a>
+    <a href="{% url 'contact' %}" class="block py-2 font-medium">Contact Us</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="relative overflow-hidden">
+  <div class="absolute inset-0">
+    <img id="heroImg" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1920&auto=format&fit=crop" class="hero-img h-full w-full object-cover" alt="">
+    <div class="absolute inset-0 bg-gradient-to-b from-[#0F172A]/60 via-[#0F172A]/35 to-[#FCFCFD]"></div>
+  </div>
+  <div class="relative mx-auto max-w-[1280px] px-5 sm:px-8">
+    <div class="pt-[72px] sm:pt-[96px] pb-[36px] sm:pb-[56px] max-w-[840px] mx-auto text-center">
+      <div class="reveal inline-flex items-center gap-2 rounded-full bg-white/90 backdrop-blur px-3.5 py-1.5 text-[11px] font-semibold tracking-wide shadow">
+        <span class="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span> 100+ VERIFIED PROPERTIES IN CHENNAI
+      </div>
+      <h1 class="reveal stagger-1 mt-6 font-['Fraunces'] text-[40px] sm:text-[64px] font-bold leading-[0.95] tracking-tight text-white drop-shadow-[0_2px_20px_rgba(0,0,0,0.3)]">
+        FIND YOUR<br>DREAM PROPERTY
+      </h1>
+      <p class="reveal stagger-2 mt-4 text-[15px] sm:text-[17px] font-medium tracking-wide text-white/80">
+        Buy • Sell • Premium Villas & Apartments
+      </p>
+<br>
+      <!-- Search Bar - For Django: this will be GET form -->
+       
+      <!-- Search Section -->
+
+<div class="container">
+
+    <div class="card shadow-lg border-0 rounded-5 p-3 mt-n5">
+
+        <form method="GET" action="{% url 'search_properties' %}">
+
+            <div class="row g-3 align-items-center">
+
+                <!-- Location -->
+
+                <div class="col-lg-5">
+
+                    <select class="form-select form-select-lg rounded-pill"
+                            name="location">
+
+                        <option value="">
+                            📍 Select Location
+                        </option>
+
+                        {% for location in locations %}
+
+                        <option value="{{ location.id }}">
+                            {{ location.name }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <!-- BHK -->
+
+                <div class="col-lg-4">
+
+                    <select class="form-select form-select-lg rounded-pill"
+                            name="bhk">
+
+                        <option value="">
+                            🏠 Select BHK
+                        </option>
+
+                        {% for bhk in bhks %}
+
+                        <option value="{{ bhk.id }}">
+                            {{ bhk.name }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <!-- Button -->
+
+                <div class="col-lg-3 d-grid">
+
+                    <button class="btn btn-dark btn-lg rounded-pill">
+
+                        🔍 Search
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+        
+
+    </div>
+
+</div>
+
+      <br>
+
+    <!-- TWO BIG CARDS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pb-12 sm:pb-16 max-w-[960px] mx-auto">
+      <!-- BHK Card -->
+      <a href="{% url 'bhk' %}" class="reveal card-hover group relative overflow-hidden rounded-[28px] bg-white border border-black/5 p-6 sm:p-7 shadow-[0_12px_40px_rgba(0,0,0,0.06)]">
+        <div class="absolute right-0 top-0 h-[180px] w-[180px] bg-gradient-to-br from-[#E0F2FE] to-transparent rounded-full blur-[20px] -translate-y-10 translate-x-10"></div>
+        <div class="relative">
+          <div class="h-12 w-12 rounded-[14px] bg-[#0F172A] text-white grid place-items-center">🏠</div>
+          <h3 class="mt-5 font-semibold text-[22px] tracking-tight">BHK</h3>
+          <p class="mt-1 text-[14px] text-black/55">Browse by BHK Category</p>
+          <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#0F172A] px-4 h-10 text-white text-[13px] font-semibold group-hover:bg-black transition">
+            Explore <span class="text-[16px]">→</span>
+          </div>
+          <div class="mt-8 flex gap-2 text-[11px] font-medium">
+            <span class="rounded-full bg-[#F1F5F9] px-2.5 py-1">1 BHK</span>
+            <span class="rounded-full bg-[#F1F5F9] px-2.5 py-1">2 BHK</span>
+            <span class="rounded-full bg-[#F1F5F9] px-2.5 py-1">3 BHK</span>
+            <span class="rounded-full bg-[#0F172A] text-white px-2.5 py-1">Villas</span>
+          </div>
+        </div>
+      </a>
+      <!-- Location Card -->
+      <a href="{% url 'location' %}" class="reveal stagger-1 card-hover group relative overflow-hidden rounded-[28px] bg-white border border-black/5 p-6 sm:p-7 shadow-[0_12px_40px_rgba(0,0,0,0.06)]">
+        <div class="absolute right-0 top-0 h-[180px] w-[180px] bg-gradient-to-br from-[#CCFBF1] to-transparent rounded-full blur-[20px] -translate-y-10 translate-x-10"></div>
+        <div class="relative">
+          <div class="h-12 w-12 rounded-[14px] bg-[#14B8A6] text-white grid place-items-center">📍</div>
+          <h3 class="mt-5 font-semibold text-[22px] tracking-tight">LOCATION</h3>
+          <p class="mt-1 text-[14px] text-black/55">Browse by Area</p>
+          <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-[#0F172A] px-4 h-10 text-white text-[13px] font-semibold group-hover:bg-black transition">
+            Explore <span class="text-[16px]">→</span>
+          </div>
+          <div class="mt-8 flex gap-2 text-[11px] font-medium flex-wrap">
+            <span class="rounded-full bg-[#F1F5F9] px-2.5 py-1">Chennai</span>
+            <span class="rounded-full bg-[#F1F5F9] px-2.5 py-1">Avadi</span>
+            <span class="rounded-full bg-[#F1F5F9] px-2.5 py-1">Tiruvallur</span>
+            <span class="rounded-full bg-[#F1F5F9] px-2.5 py-1">Poonamallee</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section class="mx-auto max-w-[1280px] px-5 sm:px-8 py-12 sm:py-16">
+  <div class="flex items-end justify-between">
+    <div>
+      <h2 class="reveal font-['Fraunces'] text-[28px] sm:text-[36px] font-bold tracking-tight leading-none">Featured Properties</h2>
+      <p class="reveal mt-2 text-[14px] text-black/55">Handpicked premium homes for you</p>
+    </div>
+    <a href="{% url 'all_properties' %}"
+   class="btn btn-dark rounded-pill px-4">
+    View All Properties →
+</a>
+  </div>
+
+  <!-- Django loop start: {% for property in featured_properties %} -->
+  <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+    <!-- Card 1 -->
+    <div class="reveal group rounded-[22px] overflow-hidden bg-white border border-black/5 shadow-sm hover:shadow-[0_18px_40px_rgba(0,0,0,0.12)] transition-all duration-500">
+      <div class="relative h-[200px] overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&auto=format&fit=crop&q=80" class="h-full w-full object-cover group-hover:scale-105 transition duration-700" alt="">
+        <div class="absolute top-3 left-3 flex gap-2">
+          <span class="rounded-full bg-white/90 backdrop-blur px-2.5 py-1 text-[11px] font-bold">🟢 Available</span>
+          <span class="rounded-full bg-[#0F172A] text-white px-2.5 py-1 text-[10px] font-semibold">Premium</span>
+        </div>
+      </div>
+      <div class="p-4">
+        <h3 class="font-semibold text-[16px]">Modern Villa</h3>
+        <p class="mt-1 flex items-center gap-1 text-[12px] text-black/55">📍 Chennai</p>
+        <div class="mt-3 flex items-center justify-between">
+          <span class="font-['Fraunces'] text-[18px] font-bold">₹48 Lakhs</span>
+          <a href="property-details.html" class="h-8 rounded-full bg-[#0F172A] px-4 text-[12px] font-semibold text-white grid place-items-center hover:bg-black">View Details</a>
+        </div>
+      </div>
+    </div>
+    <!-- Card 2 -->
+    <div class="reveal stagger-1 group rounded-[22px] overflow-hidden bg-white border border-black/5 shadow-sm hover:shadow-[0_18px_40px_rgba(0,0,0,0.12)] transition-all duration-500">
+      <div class="relative h-[200px] overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&auto=format&fit=crop&q=80" class="h-full w-full object-cover group-hover:scale-105 transition duration-700 grayscale-[0.2]" alt="">
+        <div class="absolute inset-0 bg-white/30"></div>
+        <div class="absolute top-3 left-3 flex gap-2">
+          <span class="rounded-full bg-white/90 backdrop-blur px-2.5 py-1 text-[11px] font-bold">🔴 Sold Out</span>
+        </div>
+      </div>
+      <div class="p-4">
+        <h3 class="font-semibold text-[16px]">Green Residency</h3>
+        <p class="mt-1 text-[12px] text-black/55">📍 Avadi</p>
+        <div class="mt-3 flex items-center justify-between">
+          <span class="font-['Fraunces'] text-[18px] font-bold">₹52 Lakhs</span>
+          <a href="property-details.html" class="h-8 rounded-full bg-black/10 px-4 text-[12px] font-semibold grid place-items-center">View Details</a>
+        </div>
+      </div>
+    </div>
+    <!-- Card 3 -->
+    <div class="reveal stagger-2 group rounded-[22px] overflow-hidden bg-white border border-black/5 shadow-sm hover:shadow-[0_18px_40px_rgba(0,0,0,0.12)] transition-all duration-500">
+      <div class="relative h-[200px] overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop&q=80" class="h-full w-full object-cover group-hover:scale-105 transition duration-700" alt="">
+        <div class="absolute top-3 left-3 flex gap-2">
+          <span class="rounded-full bg-white/90 backdrop-blur px-2.5 py-1 text-[11px] font-bold">🟢 Available</span>
+          <span class="rounded-full bg-[#14B8A6] text-white px-2.5 py-1 text-[10px] font-semibold">Luxury</span>
+        </div>
+      </div>
+      <div class="p-4">
+        <h3 class="font-semibold text-[16px]">Royal Garden</h3>
+        <p class="mt-1 text-[12px] text-black/55">📍 Poonamallee</p>
+        <div class="mt-3 flex items-center justify-between">
+          <span class="font-['Fraunces'] text-[18px] font-bold">₹1.2 Cr</span>
+          <a href="property-details.html" class="h-8 rounded-full bg-[#0F172A] px-4 text-[12px] font-semibold text-white grid place-items-center hover:bg-black">View Details</a>
+        </div>
+      </div>
+    </div>
+    <!-- Card 4 -->
+    <div class="reveal stagger-3 group rounded-[22px] overflow-hidden bg-white border border-black/5 shadow-sm hover:shadow-[0_18px_40px_rgba(0,0,0,0.12)] transition-all duration-500">
+      <div class="relative h-[200px] overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&auto=format&fit=crop&q=80" class="h-full w-full object-cover group-hover:scale-105 transition duration-700" alt="">
+        <div class="absolute top-3 left-3 flex gap-2">
+          <span class="rounded-full bg-white/90 backdrop-blur px-2.5 py-1 text-[11px] font-bold">🟢 Available</span>
+        </div>
+      </div>
+      <div class="p-4">
+        <h3 class="font-semibold text-[16px]">Skyline Homes</h3>
+        <p class="mt-1 text-[12px] text-black/55">📍 Tiruvallur</p>
+        <div class="mt-3 flex items-center justify-between">
+          <span class="font-['Fraunces'] text-[18px] font-bold">₹36 Lakhs</span>
+          <a href="property-details.html" class="h-8 rounded-full bg-[#0F172A] px-4 text-[12px] font-semibold text-white grid place-items-center hover:bg-black">View Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Django loop end: {% endfor %} -->
+</section>
+
+<!-- TRUST -->
+<section class="border-y border-black/5 bg-white">
+  <div class="mx-auto max-w-[1280px] px-5 sm:px-8 py-5 flex flex-wrap justify-center sm:justify-between gap-6 text-[13px] font-medium text-black/50">
+    <span>✓ 100% Verified Listings</span><span>✓ No Brokerage</span><span>✓ Site Visit in 24Hrs</span><span>✓ Legal Assistance</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-[#0F172A] text-white">
+  <div class="mx-auto max-w-[1280px] px-5 sm:px-8 pt-12 pb-8">
+    <div class="grid grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr] gap-10">
+      <div class="col-span-2 lg:col-span-1">
+        <div class="flex items-center gap-3"><div class="h-9 w-9 rounded-[11px] bg-white text-[#0F172A] grid place-items-center font-bold">Q</div><div class="font-extrabold text-[18px]">QKeys<span class="text-[#5EEAD4]">.in</span></div></div>
+        <p class="mt-4 text-[13px] leading-[1.7] text-white/55 max-w-[32ch]">Premium villas & apartments across Chennai. Direct owner contact, verified listings, transparent pricing.</p>
+      </div>
+      <div><h4 class="text-[11px] font-bold tracking-[0.18em] uppercase text-white/40">Browse</h4><ul class="mt-4 space-y-2 text-[14px] text-white/70"><li><a href="bhk.html" class="hover:text-white">BHK Categories</a></li><li><a href="location.html" class="hover:text-white">By Location</a></li></ul></div>
+      <div><h4 class="text-[11px] font-bold tracking-[0.18em] uppercase text-white/40">Company</h4><ul class="mt-4 space-y-2 text-[14px] text-white/70"><li><a href="#" class="hover:text-white">About Us</a></li><li><a href="#" class="hover:text-white">Contact</a></li></ul></div>
+      <div><h4 class="text-[11px] font-bold tracking-[0.18em] uppercase text-white/40">Contact</h4><div class="mt-4 text-[14px] text-white/70">+91 84383 83770<br>qkeys@gmail.com<br><br>Tiruvallur - 602001</div></div>
+    </div>
+    <div class="mt-10 border-t border-white/10 pt-6 text-[12px] text-white/40 flex justify-between"><span>© 2026 QKeys.in</span><span>Premium Chennai Homes</span></div>
+  </div>
+</footer>
+
+<script>
+// Mobile menu
+document.getElementById('mobBtn').addEventListener('click',()=>{
+  document.getElementById('mobMenu').classList.toggle('hidden');
+});
+// Parallax + reveal
+const heroImg=document.getElementById('heroImg');
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  heroImg.style.transform=`translateY(${y*0.15}px) scale(1.06)`;
+},{passive:true});
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in-view')})
+},{threshold:0.15});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

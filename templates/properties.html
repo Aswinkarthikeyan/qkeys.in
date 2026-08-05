@@ -1,0 +1,210 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Properties | QKeys.in</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body{
+            background:#F8FAFC;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+
+<nav class="bg-white shadow-md sticky top-0 z-50">
+
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+
+        <a href="{% url 'home' %}" class="text-3xl font-bold text-blue-700">
+            QKeys<span class="text-gray-900">.in</span>
+        </a>
+
+        <div class="space-x-6 font-medium">
+
+            <a href="{% url 'home' %}" class="hover:text-blue-700">Home</a>
+
+            <a href="{% url 'bhk' %}" class="hover:text-blue-700">BHK</a>
+
+            <a href="{% url 'location' %}" class="hover:text-blue-700">Location</a>
+
+            <a href="{% url 'about' %}" class="hover:text-blue-700">About Us</a>
+
+            <a href="{% url 'contact' %}" class="hover:text-blue-700">Contact</a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<!-- Hero -->
+
+<section class="bg-gradient-to-r from-blue-700 to-blue-900 text-white py-16">
+
+    <div class="max-w-7xl mx-auto px-6 text-center">
+
+        <h1 class="text-5xl font-bold">
+
+            Available Properties
+
+        </h1>
+
+        <p class="mt-4 text-xl text-blue-100">
+
+            Explore verified homes, apartments and villas.
+
+        </p>
+
+    </div>
+
+</section>
+
+<!-- Property Listing -->
+
+<section class="max-w-7xl mx-auto px-6 py-12">
+
+    <div class="grid lg:grid-cols-2 gap-8">
+
+        {% for property in properties %}
+
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300">
+
+            <!-- Image -->
+
+           
+
+       
+
+            <!-- Card Body -->
+
+            <div class="p-6">
+
+                <div class="flex justify-between items-center">
+
+                    <h2 class="text-2xl font-bold">
+
+                        {{ property.title }}
+
+                    </h2>
+
+                    {% if property.availability == "Available" %}
+
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
+
+                            🟢 Available
+
+                        </span>
+
+                    {% else %}
+
+                        <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">
+
+                            🔴 Sold Out
+
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+                <div class="mt-5 space-y-2 text-gray-700">
+
+                    <p>📍 <strong>Location:</strong> {{ property.location }}</p>
+
+                    <p>🏠 <strong>BHK:</strong> {{ property.bhk }}</p>
+
+                    <p>📐 <strong>Area:</strong> {{ property.area }} Sq.ft</p>
+
+                    <p>🚗 <strong>Parking:</strong>
+                        {% if property.parking %}
+                            Available
+                        {% else %}
+                            No
+                        {% endif %}
+                    </p>
+
+                </div>
+
+                <div class="mt-6">
+
+                    <span class="text-4xl font-bold text-blue-700">
+
+                        ₹ {{ property.price }}
+
+                    </span>
+
+                </div>
+
+                <!-- Buttons -->
+
+                <div class="grid grid-cols-2 gap-4 mt-8">
+
+                    <!-- This redirects to property_detail.html -->
+
+                    <a href="{% url 'property_detail' property.id %}"
+
+                       class="bg-blue-700 hover:bg-blue-800 text-white text-center py-3 rounded-lg font-semibold transition">
+
+                        View Details
+
+                    </a>
+
+                   <a href="https://wa.me/918438383770?text=Hi,%20I'm%20interested%20to%20know%20more%20about%20this%20{{ property.title }}%20Property."
+   target="_blank"
+   class="bg-green-600 hover:bg-green-700 text-white text-center py-3 rounded-lg font-semibold transition">
+
+    WhatsApp
+
+</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="col-span-2 text-center py-20">
+
+            <h2 class="text-4xl font-bold text-gray-500">
+
+                No Properties Found
+
+            </h2>
+
+            <p class="mt-4 text-gray-400">
+
+                Please try another BHK or Location.
+
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<footer class="bg-slate-900 text-white py-8 mt-10">
+
+    <div class="text-center">
+
+        © 2026 QKeys.in | Developed by <strong>13 CARDS PRODUCTION</strong>
+
+    </div>
+
+</footer>
+
+</body>
+</html>
