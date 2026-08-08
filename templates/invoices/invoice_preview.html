@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+        Invoice {{ invoice.invoice_number }}
+    </title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .invoice {
+            background: white;
+            max-width: 850px;
+            margin: auto;
+            padding: 40px;
+        }
+
+        .header {
+            text-align: center;
+        }
+
+        .company-name {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .company-subtitle {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .invoice-title {
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 25px;
+        }
+
+        .details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        th {
+            background: #f1f1f1;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        .totals {
+            width: 350px;
+            margin-left: auto;
+            margin-top: 25px;
+        }
+
+        .total {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .actions {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 20px;
+            margin: 5px;
+            text-decoration: none;
+            background: black;
+            color: white;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="invoice">
+
+    <div class="header">
+
+        <div class="company-name">
+            Qkeys.in
+        </div>
+
+        <div class="company-subtitle">
+            A Real Estate Agency under
+            13 CARDS PRODUCTION
+        </div>
+
+        <div class="invoice-title">
+            INVOICE
+        </div>
+
+    </div>
+
+
+    <div class="details">
+
+        <div>
+
+            <strong>BILL TO:</strong>
+
+            <p>
+                {{ invoice.customer.name }}
+            </p>
+
+            <p>
+                {{ invoice.customer.address }}
+            </p>
+
+            <p>
+                {{ invoice.customer.phone }}
+            </p>
+
+            <p>
+                {{ invoice.customer.email }}
+            </p>
+
+            {% if invoice.customer.gst_number %}
+                <p>
+                    GSTIN:
+                    {{ invoice.customer.gst_number }}
+                </p>
+            {% endif %}
+
+        </div>
+
+
+        <div>
+
+            <p>
+                <strong>Invoice No:</strong>
+                {{ invoice.invoice_number }}
+            </p>
+
+            <p>
+                <strong>Invoice Date:</strong>
+                {{ invoice.invoice_date|date:"d-m-Y" }}
+            </p>
+
+            <p>
+                <strong>Due Date:</strong>
+                {{ invoice.due_date|date:"d-m-Y" }}
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>
+                    Description
+                </th>
+
+                <th>
+                    Qty
+                </th>
+
+                <th>
+                    Rate
+                </th>
+
+                <th>
+                    Amount
+                </th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+            {% for item in items %}
+
+            <tr>
+
+                <td>
+                    {{ item.description }}
+                </td>
+
+                <td>
+                    {{ item.quantity }}
+                </td>
+
+                <td class="right">
+                    ₹{{ item.rate }}
+                </td>
+
+                <td class="right">
+                    ₹{{ item.amount }}
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+
+    <div class="totals">
+
+        <p>
+            Subtotal:
+            <strong>
+                ₹{{ invoice.subtotal }}
+            </strong>
+        </p>
+
+        <p>
+            GST @ {{ invoice.gst_rate }}%:
+            <strong>
+                ₹{{ invoice.gst_amount }}
+            </strong>
+        </p>
+
+        <hr>
+
+        <p class="total">
+
+            TOTAL:
+
+            ₹{{ invoice.total_amount }}
+
+        </p>
+
+    </div>
+
+
+    {% if invoice.notes %}
+
+        <div>
+
+            <strong>Notes:</strong>
+
+            <p>
+                {{ invoice.notes }}
+            </p>
+
+        </div>
+
+    {% endif %}
+
+
+    <div class="actions">
+
+        <a
+    href="{% url 'invoices:invoice_pdf' invoice.id %}"
+    class="button"
+>
+    Generate PDF
+</a>
+
+        <a
+    href="{% url 'invoices:invoice_download' invoice.id %}"
+    class="button">
+    Download PDF
+</a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
